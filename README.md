@@ -27,6 +27,8 @@ $ ./emojis
 
 You can use `curl` to hit a Github API endpoint first just to see what it sends back, but you should use Net::HTTP in Ruby to get the job done in your script.
 
+Note that Github's API is all over [HTTPS](http://ruby-doc.org/stdlib-2.1.5/libdoc/net/http/rdoc/Net/HTTP.html#class-Net::HTTP-label-HTTPS).
+
 ## Release 2, Authenticate
 Github aggressively rate-limits the number of requests we can make to their HTTP servers if we are not authenticated (only 60 reqs/hr), and those request are shared by everyone on the network. We'll run out of requests in no time as you test your code, so we need to start passing our credentials. Authenticated requests have a cap of 5000 reqs/hr — that should be enough.
 
@@ -48,19 +50,18 @@ Example:
 $./ruby-profile mattbaker
 Name: Matt Baker
 Location: Chicago, IL
-Public Repos: 15
+Public Repos: 10
 
- * ruby-heap-viz (237 watchers)
+ * ruby-heap-viz (239 watchers)
  * Reactive.js (179 watchers)
  * Arrhythmia (17 watchers)
  * websocket-pipe (13 watchers)
+ * swift-funsets (1 watchers)
+ * mattbaker.github.com (1 watchers)
  * divvyviz (1 watchers)
  * is-lucas-home-yet (1 watchers)
- * mattbaker.github.com (1 watchers)
- * swift-funsets (1 watchers)
- * matasano-crypto-challenges (0 watchers)
  * ruby-tar-pit (0 watchers)
-
+ * matasano-crypto-challenges (0 watchers)
 ```
 
 ## Release 4, Refactor
@@ -92,7 +93,8 @@ Mocking lets us say:
 
 ```ruby
 expect(foo).to receive(:bar)
-# foo.bar
+###
+foo.bar
 ```
 
 Sometimes we want to also assert that 'bar' is being called with specific arguments.
@@ -105,7 +107,8 @@ If we want to say...
 
 ```ruby
 expect(foo).to receive(:bar).with(1234)
-# foo.bar(1234)
+###
+foo.bar(1234)
 ```
 
 Finally, and most relevant to us, we can say:
@@ -114,7 +117,18 @@ Finally, and most relevant to us, we can say:
 
 ```ruby
 expect(foo).to receive(:bar).and_return('hello')
-# foo.bar #=> 'hello'
+###
+foo.bar #=> 'hello'
+```
+
+You can do something similar for methods that take blocks.
+
+```ruby
+expect(foo).to receive(:bar).and_yield('hello')
+###
+foo.bar do |value|
+  value #=> 'hello'
+end
 ```
 
 Use this concept to mock `Net::HTTP` so that it returns a fake JSON response without ever making a real network request. Grab an instructor if you get stuck. Don't forget to check the [docs](https://github.com/rspec/rspec-mocks) on Rspec Mocks.
