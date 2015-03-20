@@ -133,6 +133,10 @@ end
 
 Use this concept to mock `Net::HTTP` so that it returns a fake JSON response without ever making a real network request. Grab an instructor if you get stuck. Don't forget to check the [docs](https://github.com/rspec/rspec-mocks) on Rspec Mocks.
 
+### Write the code you want to see in the world.
+
+**Don't skimp on this refactor.** One of your cohort mates will be using your Github API Client in another challenge, so don't leave them high and dry. Your code should be well written, well organized, usable, understandable and well tested. 
+
 ## Release 5, More Detail
 
 Let's expand our utility more. If a user passes a user _and_ a repository name, show the event feed of that repo. For example:
@@ -176,4 +180,14 @@ Events: 29
  * Watched by scvalencia
 ```
 
-Continue the pattern of encapsulation we started in Release 4, and ensure your code is tested before submission.
+## Release 6, Expand your Abstraction
+
+Expand your model to support pull requests. Continue the pattern of encapsulation we started in Release 4.
+
+You should be able to:
+ 
+ * Get Pull Requests for a repository
+ * Get the list of files in a given pull request
+ * Find out if a pull request has been merged
+ * Merge a pull request
+  * Test this on a dummy repo, please don't work against a challenge repo. You can create a new repo for yourself in the cohort organization.
