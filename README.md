@@ -34,7 +34,7 @@ Github aggressively rate-limits the number of requests we can make to their HTTP
 
 You already know about request and response headers from our work on the HTTP server challenge. One of the first additions to your github client should be the [Authorization header](https://developer.github.com/v3/#authentication).
 
-You can [generate](https://github.com/settings/applications) an OAuth token for yourself to use in authentication, Github calls this a "Personal Access Token." You'll pass that token in the Authorization header to let Github know the request is coming from you (the user). The [docs](https://developer.github.com/v3/#authentication) have an example of that header (see the `curl -h` example).
+You can [generate](https://github.com/settings/tokens) an OAuth token for yourself to use in authentication, Github calls this a "Personal Access Token." You'll pass that token in the Authorization header to let Github know the request is coming from you (the user). The [docs](https://developer.github.com/v3/#authentication) have an example of that header (see the `curl -h` example).
 
 Test your authentication by accessing the `/user` resource. If you are authenticated correctly, you should get back some information about yourself. If you're getting a `401` or `403` response from the server it means something is going wrong with authentication.
 
